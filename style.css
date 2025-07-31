@@ -20,15 +20,17 @@ body {
 
 #clock {
   position: absolute;
-  text-align: right;
+  text-align: center;
   opacity: 1;
   height: auto;
   font-size: 56px;
   font-family: monospace;
   top: 10%;
   right: 10%;
-  left: 10%;
-  width: 80vw;
+  width: 10vw;
+  background-color: #0a0a0a99;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
 
 #typing {
@@ -39,9 +41,11 @@ body {
   font-size: 32px;
   font-family: monospace;
   bottom: 20%;
-  right: 10%;
   left: 10%;
-  width: 60vw;
+  max-width: 60vw;
+  background-color: #0a0a0a99;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
 
 .text-shadow {

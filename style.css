@@ -1,0 +1,51 @@
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+}
+
+#bg {
+  position: absolute;
+  opacity: 1;
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: opacity 1s ease-in-out; /* Smooth opacity transition */
+}
+
+#bg.fading {
+  opacity: 0;
+}
+
+#clock {
+  position: absolute;
+  text-align: right;
+  opacity: 1;
+  height: auto;
+  font-size: 56px;
+  font-family: monospace;
+  top: 10%;
+  right: 10%;
+  left: 10%;
+  width: 80vw;
+}
+
+#typing {
+  position: absolute;
+  opacity: 1;
+  text-align: left;
+  height: auto;
+  font-size: 32px;
+  font-family: monospace;
+  bottom: 20%;
+  right: 10%;
+  left: 10%;
+  width: 60vw;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7)
+      /* Strong shadow for dark backgrounds */,
+    -1px -1px 3px rgba(0, 0, 0, 0.5); /* Additional shadow for depth */
+}

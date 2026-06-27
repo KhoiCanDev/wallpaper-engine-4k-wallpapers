@@ -16,10 +16,14 @@ function extractQuotes(htmlString) {
     const [quote] = quoteWithAuthorText.split('―');
 
     if (quote && authorElement) {
-      quotes.push({
-        quote: quote.trim(),
-        author: authorElement.text().replaceAll(',', '').trim(),
-      });
+      const trimmedQuote = quote.trim();
+      const wordCount = trimmedQuote.split(/\s+/).length;
+      if (wordCount <= 50) {
+        quotes.push({
+          quote: trimmedQuote,
+          author: authorElement.text().replaceAll(',', '').trim(),
+        });
+      }
     }
   });
 
@@ -39,12 +43,22 @@ const getRandomQuote = (extractedQuotes) => {
 };
 
 async function fetchRandomQuote() {
-  const randomPage = Math.floor(Math.random() * 100) + 1;
-  const response = await fetch(
-    `https://www.goodreads.com/quotes?page=${randomPage}`
-  );
-  const htmlContent = await response.text();
-  const extractedQuotes = extractQuotes(htmlContent);
-  const randomQuote = getRandomQuote(extractedQuotes);
-  return randomQuote;
+  let attempts = 0;
+  while (attempts < 5) {
+    const randomPage = Math.floor(Math.random() * 100) + 1;
+    try {
+      const response = await fetch(
+        `https://www.goodreads.com/quotes?page=${randomPage}`
+      );
+      const htmlContent = await response.text();
+      const extractedQuotes = extractQuotes(htmlContent);
+      if (extractedQuotes.length > 0) {
+        return getRandomQuote(extractedQuotes);
+      }
+    } catch (error) {
+      console.error('Error fetching quotes page:', error);
+    }
+    attempts++;
+  }
+  return { quote: 'No short quotes available', author: 'Computer' };
 }

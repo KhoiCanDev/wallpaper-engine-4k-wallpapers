@@ -1,30 +1,97 @@
 {
-	"contentrating" : "Everyone",
-	"description" : "Daily Bing Wallpaper in 4K\r\nWith random quotes\r\nRefresh interval 10 minutes\r\n",
-	"file" : "index.html",
-	"general" : 
-	{
-		"properties" : 
-		{
-			"schemecolor" : 
-			{
-				"order" : 0,
-				"text" : "ui_browse_properties_scheme_color",
-				"type" : "color",
-				"value" : "0.9411764705882353 0.9411764705882353 0.9411764705882353"
+	"contentrating": "Everyone",
+	"description": "Daily Wallpaper in 4K\r\nWith random quotes\r\nRefresh interval 10 minutes\r\n",
+	"file": "index.html",
+	"general": {
+		"properties": {
+			"schemecolor": {
+				"order": 0,
+				"text": "ui_browse_properties_scheme_color",
+				"type": "color",
+				"value": "0.9411764705882353 0.9411764705882353 0.9411764705882353"
+			},
+			"clockfont": {
+				"order": 1,
+				"text": "Clock Font",
+				"type": "combo",
+				"value": "sharetechmono",
+				"options": [
+					{
+						"label": "Share Tech Mono (Sleek Tech)",
+						"value": "sharetechmono"
+					},
+					{
+						"label": "Fira Code",
+						"value": "firacode"
+					},
+					{
+						"label": "JetBrains Mono",
+						"value": "jetbrainsmono"
+					},
+					{
+						"label": "Roboto Mono",
+						"value": "robotomono"
+					},
+					{
+						"label": "Source Code Pro",
+						"value": "sourcecodepro"
+					},
+					{
+						"label": "Inconsolata",
+						"value": "inconsolata"
+					},
+					{
+						"label": "IBM Plex Mono",
+						"value": "ibmplexmono"
+					},
+					{
+						"label": "Courier Prime",
+						"value": "courierprime"
+					},
+					{
+						"label": "VT323 (Retro)",
+						"value": "vt323"
+					},
+					{
+						"label": "Space Mono",
+						"value": "spacemono"
+					},
+					{
+						"label": "Default Monospace",
+						"value": "monospace"
+					}
+				]
+			},
+			"wallpapersource": {
+				"order": 2,
+				"text": "Wallpaper Source",
+				"type": "combo",
+				"value": "bing",
+				"options": [
+					{
+						"label": "Bing Daily (4K Landscape)",
+						"value": "bing"
+					},
+					{
+						"label": "Wallhaven (Popular 4K)",
+						"value": "wallhaven"
+					}
+				]
 			}
 		}
 	},
-	"preview" : "preview.jpg",
-	"ratingsex" : "none",
-	"ratingviolence" : "none",
-	"snapshotformat" : -1,
-	"snapshotoverlay" : "",
-	"tags" : [ "Nature" ],
-	"title" : "Bing 4K Wallpaper with Quotes",
-	"type" : "Web",
-	"version" : 3,
-	"visibility" : "public",
-	"workshopid" : "3481003621",
-	"workshopurl" : "steam://url/CommunityFilePage/3481003621"
+	"preview": "preview.jpg",
+	"ratingsex": "none",
+	"ratingviolence": "none",
+	"snapshotformat": -1,
+	"snapshotoverlay": "",
+	"tags": [
+		"Nature"
+	],
+	"title": "4K Wallpaper with Quotes",
+	"type": "Web",
+	"version": 3,
+	"visibility": "public",
+	"workshopid": "3481003621",
+	"workshopurl": "steam://url/CommunityFilePage/3481003621"
 }

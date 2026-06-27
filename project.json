@@ -18,10 +18,12 @@
 	"preview" : "preview.jpg",
 	"ratingsex" : "none",
 	"ratingviolence" : "none",
+	"snapshotformat" : -1,
+	"snapshotoverlay" : "",
 	"tags" : [ "Nature" ],
 	"title" : "Bing 4K Wallpaper with Quotes",
 	"type" : "Web",
-	"version" : 2,
+	"version" : 3,
 	"visibility" : "public",
 	"workshopid" : "3481003621",
 	"workshopurl" : "steam://url/CommunityFilePage/3481003621"

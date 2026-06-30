@@ -2,6 +2,15 @@ const IMAGE_ROTATION_MIN = 10 * 60 * 1000; // Minimum time before changing wallp
 let typedInstance = null;
 let isRandomizing = false;
 
+function preloadImage(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.src = url;
+    img.onload = () => resolve();
+    img.onerror = (err) => reject(err);
+  });
+}
+
 async function updateWallpaper() {
   const bgElement = document.getElementById('bg');
 
@@ -13,15 +22,17 @@ async function updateWallpaper() {
     document.body.style.backgroundColor = color || '#555555';
     bgElement.classList.add('fading');
 
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        bgElement.style.backgroundImage = `url(${url})`;
-        bgElement.classList.remove('fading');
-        resolve();
-      }, 1000);
-    });
+    // Preload the image in parallel with the 1s fade-out animation
+    const fadeOutPromise = new Promise((resolve) => setTimeout(resolve, 1000));
+    const preloadPromise = preloadImage(url);
+
+    // Wait for both the fade-out and the image preloading to complete
+    await Promise.all([fadeOutPromise, preloadPromise]);
+
+    bgElement.style.backgroundImage = `url(${url})`;
+    bgElement.classList.remove('fading');
   } catch (error) {
-    console.error('Error fetching wallpaper:', error);
+    console.error('Error updating wallpaper:', error);
     bgElement.classList.remove('fading');
   }
 }

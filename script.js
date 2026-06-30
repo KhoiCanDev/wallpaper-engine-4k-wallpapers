@@ -4,11 +4,14 @@ let isRandomizing = false;
 
 async function updateWallpaper() {
   const bgElement = document.getElementById('bg');
-  bgElement.classList.add('fading');
 
   try {
     const wallpaperData = await fetchRandomWallpaper();
-    const { url } = wallpaperData;
+    const { url, color } = wallpaperData;
+
+    // Set the body background color to transition to the new color
+    document.body.style.backgroundColor = color || '#555555';
+    bgElement.classList.add('fading');
 
     return new Promise((resolve) => {
       setTimeout(() => {

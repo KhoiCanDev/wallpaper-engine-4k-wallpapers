@@ -5,7 +5,7 @@ async function fetchBingWallpaper() {
     'https://bing.biturl.top/?resolution=UHD&format=json&index=0&mkt=random'
   );
   const data = await response.json();
-  return { url: data.url };
+  return { url: data.url, color: '#555555' };
 }
 
 async function fetchWallhavenWallpaper() {
@@ -17,7 +17,9 @@ async function fetchWallhavenWallpaper() {
   const result = await response.json();
   if (result && result.data && result.data.length > 0) {
     const randomIndex = Math.floor(Math.random() * result.data.length);
-    return { url: result.data[randomIndex].path };
+    const item = result.data[randomIndex];
+    const color = (item.colors && item.colors.length > 0) ? item.colors[0] : '#555555';
+    return { url: item.path, color: color };
   }
   throw new Error('No Wallhaven wallpapers found');
 }

@@ -2,6 +2,20 @@ let imageRotationTime = 10 * 60 * 1000; // Minimum time before changing wallpape
 let typedInstance = null;
 let isRandomizing = false;
 
+const fontMapping = {
+  sharetechmono: "'Share Tech Mono', monospace",
+  firacode: "'Fira Code', monospace",
+  jetbrainsmono: "'JetBrains Mono', monospace",
+  robotomono: "'Roboto Mono', monospace",
+  sourcecodepro: "'Source Code Pro', monospace",
+  inconsolata: "'Inconsolata', monospace",
+  ibmplexmono: "'IBM Plex Mono', monospace",
+  courierprime: "'Courier Prime', monospace",
+  vt323: "'VT323', monospace",
+  spacemono: "'Space Mono', monospace",
+  monospace: "monospace"
+};
+
 function preloadImage(url) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -186,24 +200,23 @@ window.wallpaperPropertyListener = {
     }
 
     if (properties.clockfont) {
-      const selectedFont = properties.clockfont.value;
-      const clockElement = document.getElementById('clock');
-      const fontMapping = {
-        sharetechmono: "'Share Tech Mono', monospace",
-        firacode: "'Fira Code', monospace",
-        jetbrainsmono: "'JetBrains Mono', monospace",
-        robotomono: "'Roboto Mono', monospace",
-        sourcecodepro: "'Source Code Pro', monospace",
-        inconsolata: "'Inconsolata', monospace",
-        ibmplexmono: "'IBM Plex Mono', monospace",
-        courierprime: "'Courier Prime', monospace",
-        vt323: "'VT323', monospace",
-        spacemono: "'Space Mono', monospace",
-        monospace: "monospace"
-      };
+      const el = document.getElementById('clock');
+      if (el && fontMapping[properties.clockfont.value]) {
+        el.style.fontFamily = fontMapping[properties.clockfont.value];
+      }
+    }
 
-      if (clockElement && fontMapping[selectedFont]) {
-        clockElement.style.fontFamily = fontMapping[selectedFont];
+    if (properties.quotefont) {
+      const el = document.getElementById('typing');
+      if (el && fontMapping[properties.quotefont.value]) {
+        el.style.fontFamily = fontMapping[properties.quotefont.value];
+      }
+    }
+
+    if (properties.countdownfont) {
+      const el = document.getElementById('countdown');
+      if (el && fontMapping[properties.countdownfont.value]) {
+        el.style.fontFamily = fontMapping[properties.countdownfont.value];
       }
     }
 

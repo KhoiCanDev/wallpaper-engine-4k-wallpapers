@@ -125,6 +125,110 @@
 						"value": "30"
 					}
 				]
+			},
+			"quotefont": {
+				"order": 7,
+				"text": "Quotes Font",
+				"type": "combo",
+				"value": "sharetechmono",
+				"options": [
+					{
+						"label": "Share Tech Mono (Sleek Tech)",
+						"value": "sharetechmono"
+					},
+					{
+						"label": "Fira Code",
+						"value": "firacode"
+					},
+					{
+						"label": "JetBrains Mono",
+						"value": "jetbrainsmono"
+					},
+					{
+						"label": "Roboto Mono",
+						"value": "robotomono"
+					},
+					{
+						"label": "Source Code Pro",
+						"value": "sourcecodepro"
+					},
+					{
+						"label": "Inconsolata",
+						"value": "inconsolata"
+					},
+					{
+						"label": "IBM Plex Mono",
+						"value": "ibmplexmono"
+					},
+					{
+						"label": "Courier Prime",
+						"value": "courierprime"
+					},
+					{
+						"label": "VT323 (Retro)",
+						"value": "vt323"
+					},
+					{
+						"label": "Space Mono",
+						"value": "spacemono"
+					},
+					{
+						"label": "Default Monospace",
+						"value": "monospace"
+					}
+				]
+			},
+			"countdownfont": {
+				"order": 8,
+				"text": "Countdown Font",
+				"type": "combo",
+				"value": "sharetechmono",
+				"options": [
+					{
+						"label": "Share Tech Mono (Sleek Tech)",
+						"value": "sharetechmono"
+					},
+					{
+						"label": "Fira Code",
+						"value": "firacode"
+					},
+					{
+						"label": "JetBrains Mono",
+						"value": "jetbrainsmono"
+					},
+					{
+						"label": "Roboto Mono",
+						"value": "robotomono"
+					},
+					{
+						"label": "Source Code Pro",
+						"value": "sourcecodepro"
+					},
+					{
+						"label": "Inconsolata",
+						"value": "inconsolata"
+					},
+					{
+						"label": "IBM Plex Mono",
+						"value": "ibmplexmono"
+					},
+					{
+						"label": "Courier Prime",
+						"value": "courierprime"
+					},
+					{
+						"label": "VT323 (Retro)",
+						"value": "vt323"
+					},
+					{
+						"label": "Space Mono",
+						"value": "spacemono"
+					},
+					{
+						"label": "Default Monospace",
+						"value": "monospace"
+					}
+				]
 			}
 		}
 	},

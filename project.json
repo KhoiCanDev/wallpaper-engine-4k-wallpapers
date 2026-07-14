@@ -77,6 +77,12 @@
 						"value": "wallhaven"
 					}
 				]
+			},
+			"showcountdown": {
+				"order": 3,
+				"text": "Show Countdown",
+				"type": "bool",
+				"value": false
 			}
 		}
 	},

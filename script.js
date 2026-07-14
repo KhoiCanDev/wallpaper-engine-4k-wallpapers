@@ -37,8 +37,46 @@ async function updateWallpaper() {
   }
 }
 
+let countdownInterval = null;
+let showCountdown = false;
+let nextChangeTime = 0;
+
+function updateCountdownDisplay() {
+  const el = document.getElementById('countdown');
+  if (!el) return;
+
+  if (!showCountdown) {
+    el.style.display = 'none';
+    return;
+  }
+
+  const timeLeft = nextChangeTime - Date.now();
+  if (timeLeft <= 0) {
+    el.style.display = 'none';
+    return;
+  }
+
+  el.style.display = 'block';
+  const minutes = Math.floor(timeLeft / 60000);
+  const seconds = Math.floor((timeLeft % 60000) / 1000);
+  el.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+function startCountdown(duration) {
+  nextChangeTime = Date.now() + duration;
+  if (countdownInterval) clearInterval(countdownInterval);
+  updateCountdownDisplay();
+  countdownInterval = setInterval(updateCountdownDisplay, 1000);
+}
+
 async function generateText() {
   try {
+    if (countdownInterval) {
+      clearInterval(countdownInterval);
+    }
+    const el = document.getElementById('countdown');
+    if (el) el.style.display = 'none';
+
     // Recreate the TypeIt instance to completely clear the queue and avoid duplicate queue execution
     if (typedInstance) {
       typedInstance.destroy();
@@ -58,6 +96,7 @@ async function generateText() {
       .exec(() => {
         const cursor = document.querySelector('.ti-cursor');
         if (cursor) cursor.style.display = 'none';
+        startCountdown(IMAGE_ROTATION_MIN);
       })
       .pause(IMAGE_ROTATION_MIN)
       .flush(() => {
@@ -149,6 +188,11 @@ window.wallpaperPropertyListener = {
         currentWallpaperSource = newSource;
         initialSourceApplied = true;
       }
+    }
+
+    if (properties.showcountdown) {
+      showCountdown = properties.showcountdown.value;
+      updateCountdownDisplay();
     }
   },
 };

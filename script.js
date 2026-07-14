@@ -1,4 +1,4 @@
-const IMAGE_ROTATION_MIN = 10 * 60 * 1000; // Minimum time before changing wallpaper again (in milliseconds)
+let imageRotationTime = 10 * 60 * 1000; // Minimum time before changing wallpaper again (in milliseconds)
 let typedInstance = null;
 let isRandomizing = false;
 
@@ -96,9 +96,9 @@ async function generateText() {
       .exec(() => {
         const cursor = document.querySelector('.ti-cursor');
         if (cursor) cursor.style.display = 'none';
-        startCountdown(IMAGE_ROTATION_MIN);
+        startCountdown(imageRotationTime);
       })
-      .pause(IMAGE_ROTATION_MIN)
+      .pause(imageRotationTime)
       .flush(() => {
         generateText();
       });
@@ -174,7 +174,7 @@ function applyStyleConfiguration() {
   });
 }
 
-let initialSourceApplied = false;
+let isInitialLoad = true;
 
 window.wallpaperPropertyListener = {
   applyUserProperties(properties) {
@@ -209,12 +209,22 @@ window.wallpaperPropertyListener = {
 
     if (properties.wallpapersource) {
       const newSource = properties.wallpapersource.value;
-      if (initialSourceApplied && currentWallpaperSource !== newSource) {
+      if (!isInitialLoad && currentWallpaperSource !== newSource) {
         currentWallpaperSource = newSource;
         triggerRandomize();
       } else {
         currentWallpaperSource = newSource;
-        initialSourceApplied = true;
+      }
+    }
+
+    if (properties.rotationtime) {
+      const newMinutes = parseInt(properties.rotationtime.value);
+      const newRotationTime = newMinutes * 60 * 1000;
+      if (!isInitialLoad && imageRotationTime !== newRotationTime) {
+        imageRotationTime = newRotationTime;
+        triggerRandomize();
+      } else {
+        imageRotationTime = newRotationTime;
       }
     }
 
@@ -233,6 +243,8 @@ window.wallpaperPropertyListener = {
       currentPanelColor = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.6)`;
       applyStyleConfiguration();
     }
+
+    isInitialLoad = false;
   },
 };
 

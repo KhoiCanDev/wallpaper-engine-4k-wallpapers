@@ -105,6 +105,26 @@
 				"text": "Panel/Shadow Color",
 				"type": "color",
 				"value": "0.0392156862745098 0.0392156862745098 0.0392156862745098"
+			},
+			"rotationtime": {
+				"order": 6,
+				"text": "Rotation Interval",
+				"type": "combo",
+				"value": "10",
+				"options": [
+					{
+						"label": "10 Minutes",
+						"value": "10"
+					},
+					{
+						"label": "20 Minutes",
+						"value": "20"
+					},
+					{
+						"label": "30 Minutes",
+						"value": "30"
+					}
+				]
 			}
 		}
 	},

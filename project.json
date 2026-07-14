@@ -10,9 +10,61 @@
 				"type": "color",
 				"value": "0.9411764705882353 0.9411764705882353 0.9411764705882353"
 			},
+			"wallpaper_group": {
+				"order": 100,
+				"text": "Wallpaper Rotation Settings",
+				"type": "group"
+			},
+			"wallpapersource": {
+				"order": 110,
+				"text": "Wallpaper Source",
+				"type": "combo",
+				"value": "bing",
+				"options": [
+					{
+						"label": "Bing Daily (4K Landscape)",
+						"value": "bing"
+					},
+					{
+						"label": "Wallhaven (Popular 4K)",
+						"value": "wallhaven"
+					}
+				]
+			},
+			"rotationtime": {
+				"order": 120,
+				"text": "Rotation Interval",
+				"type": "combo",
+				"value": "10",
+				"options": [
+					{
+						"label": "10 Minutes",
+						"value": "10"
+					},
+					{
+						"label": "20 Minutes",
+						"value": "20"
+					},
+					{
+						"label": "30 Minutes",
+						"value": "30"
+					}
+				]
+			},
+			"showcountdown": {
+				"order": 130,
+				"text": "Show Countdown Timer",
+				"type": "bool",
+				"value": false
+			},
+			"font_group": {
+				"order": 200,
+				"text": "Typography Settings",
+				"type": "group"
+			},
 			"clockfont": {
-				"order": 1,
-				"text": "Clock Font",
+				"order": 210,
+				"text": "Clock Font Style",
 				"type": "combo",
 				"value": "sharetechmono",
 				"options": [
@@ -62,73 +114,9 @@
 					}
 				]
 			},
-			"wallpapersource": {
-				"order": 2,
-				"text": "Wallpaper Source",
-				"type": "combo",
-				"value": "bing",
-				"options": [
-					{
-						"label": "Bing Daily (4K Landscape)",
-						"value": "bing"
-					},
-					{
-						"label": "Wallhaven (Popular 4K)",
-						"value": "wallhaven"
-					}
-				]
-			},
-			"showcountdown": {
-				"order": 3,
-				"text": "Show Countdown",
-				"type": "bool",
-				"value": false
-			},
-			"bgtype": {
-				"order": 4,
-				"text": "Background Styling",
-				"type": "combo",
-				"value": "panel",
-				"options": [
-					{
-						"label": "Background Panel",
-						"value": "panel"
-					},
-					{
-						"label": "Text Shadow Only",
-						"value": "shadow"
-					}
-				]
-			},
-			"panelcolor": {
-				"order": 5,
-				"text": "Panel/Shadow Color",
-				"type": "color",
-				"value": "0.0392156862745098 0.0392156862745098 0.0392156862745098"
-			},
-			"rotationtime": {
-				"order": 6,
-				"text": "Rotation Interval",
-				"type": "combo",
-				"value": "10",
-				"options": [
-					{
-						"label": "10 Minutes",
-						"value": "10"
-					},
-					{
-						"label": "20 Minutes",
-						"value": "20"
-					},
-					{
-						"label": "30 Minutes",
-						"value": "30"
-					}
-				]
-			},
 			"quotefont": {
-				"order": 7,
-				"text": "Quotes Font",
+				"order": 220,
+				"text": "Quotes Font Style",
 				"type": "combo",
 				"value": "sharetechmono",
 				"options": [
@@ -179,8 +167,8 @@
 				]
 			},
 			"countdownfont": {
-				"order": 8,
-				"text": "Countdown Font",
+				"order": 230,
+				"text": "Countdown Font Style",
 				"type": "combo",
 				"value": "sharetechmono",
 				"options": [
@@ -229,6 +217,33 @@
 						"value": "monospace"
 					}
 				]
+			},
+			"style_group": {
+				"order": 300,
+				"text": "Visual Styling Settings",
+				"type": "group"
+			},
+			"bgtype": {
+				"order": 310,
+				"text": "Background Overlay Type",
+				"type": "combo",
+				"value": "panel",
+				"options": [
+					{
+						"label": "Background Panel Overlay",
+						"value": "panel"
+					},
+					{
+						"label": "Text Shadow Only (Minimalist)",
+						"value": "shadow"
+					}
+				]
+			},
+			"panelcolor": {
+				"order": 320,
+				"text": "Overlay Panel / Shadow Glow Color",
+				"type": "color",
+				"value": "0.0392156862745098 0.0392156862745098 0.0392156862745098"
 			}
 		}
 	},

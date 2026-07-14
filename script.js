@@ -66,7 +66,7 @@ function startCountdown(duration) {
   nextChangeTime = Date.now() + duration;
   if (countdownInterval) clearInterval(countdownInterval);
   updateCountdownDisplay();
-  countdownInterval = setInterval(updateCountdownDisplay, 1000);
+  countdownInterval = setInterval(updateCountdownDisplay, 200);
 }
 
 async function generateText() {

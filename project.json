@@ -83,6 +83,28 @@
 				"text": "Show Countdown",
 				"type": "bool",
 				"value": false
+			},
+			"bgtype": {
+				"order": 4,
+				"text": "Background Styling",
+				"type": "combo",
+				"value": "panel",
+				"options": [
+					{
+						"label": "Background Panel",
+						"value": "panel"
+					},
+					{
+						"label": "Text Shadow Only",
+						"value": "shadow"
+					}
+				]
+			},
+			"panelcolor": {
+				"order": 5,
+				"text": "Panel/Shadow Color",
+				"type": "color",
+				"value": "0.0392156862745098 0.0392156862745098 0.0392156862745098"
 			}
 		}
 	},

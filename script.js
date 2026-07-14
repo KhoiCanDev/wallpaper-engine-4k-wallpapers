@@ -146,6 +146,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+let currentBgType = 'panel';
+let currentPanelColor = 'rgba(10, 10, 10, 0.6)';
+
+function applyStyleConfiguration() {
+  const elements = [
+    { id: 'clock', pad: '0.5rem 1rem' },
+    { id: 'typing', pad: '1rem' },
+    { id: 'countdown', pad: '0.5rem 1rem' }
+  ];
+
+  elements.forEach((item) => {
+    const el = document.getElementById(item.id);
+    if (!el) return;
+
+    if (currentBgType === 'panel') {
+      el.style.backgroundColor = currentPanelColor;
+      el.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.7), -1px -1px 3px rgba(0, 0, 0, 0.5)';
+      el.style.padding = item.pad;
+      el.style.borderRadius = '0.5rem';
+    } else {
+      el.style.backgroundColor = 'transparent';
+      el.style.textShadow = `2px 2px 6px ${currentPanelColor}, -1px -1px 4px ${currentPanelColor}`;
+      el.style.padding = '0';
+      el.style.borderRadius = '0';
+    }
+  });
+}
+
 let initialSourceApplied = false;
 
 window.wallpaperPropertyListener = {
@@ -193,6 +221,17 @@ window.wallpaperPropertyListener = {
     if (properties.showcountdown) {
       showCountdown = properties.showcountdown.value;
       updateCountdownDisplay();
+    }
+
+    if (properties.bgtype) {
+      currentBgType = properties.bgtype.value;
+      applyStyleConfiguration();
+    }
+
+    if (properties.panelcolor) {
+      const rgb = properties.panelcolor.value.split(' ').map((c) => Math.ceil(c * 255));
+      currentPanelColor = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.6)`;
+      applyStyleConfiguration();
     }
   },
 };

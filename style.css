@@ -29,12 +29,12 @@ body {
   font-size: 48px;
   font-family: 'Share Tech Mono', monospace;
   letter-spacing: 2px;
-  top: 10%;
-  right: 10%;
-  width: 18rem;
+  top: 2rem;
+  right: 2rem;
   background-color: #0a0a0a99;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  user-select: none;
 }
 
 #typing {

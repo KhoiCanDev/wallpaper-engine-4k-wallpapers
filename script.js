@@ -55,6 +55,10 @@ async function generateText() {
       .pause(1000)
       .type(quote)
       .type(`<strong>- ${author}</strong>`)
+      .exec(() => {
+        const cursor = document.querySelector('.ti-cursor');
+        if (cursor) cursor.style.display = 'none';
+      })
       .pause(IMAGE_ROTATION_MIN)
       .flush(() => {
         generateText();

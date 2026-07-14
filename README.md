@@ -1,6 +1,8 @@
 # Bing & Wallhaven 4K Wallpaper with Quotes
 
-A high-performance, dynamic 4K web wallpaper for **Wallpaper Engine** featuring a digital clock, customizable typography, random quotes, and smooth background transitions. 
+A high-performance, dynamic 4K web wallpaper for **Wallpaper Engine** featuring a digital clock, customizable typography, random quotes, smooth dominant-color transitions, and a countdown timer.
+
+[**Steam Workshop Page**](https://steamcommunity.com/sharedfiles/filedetails/?id=3481003621)
 
 This repository features an automated build pipeline that bundles and minifies assets into a production-ready `dist/` directory, ready to be deployed directly to the Steam Workshop.
 
@@ -8,11 +10,14 @@ This repository features an automated build pipeline that bundles and minifies a
 
 ## 🚀 Features
 
-* **Dual Wallpaper Sources**: Switch between **Bing Daily** (national landscapes) and **Wallhaven Popular 4K** (highly rated community images) directly inside the Wallpaper Engine settings.
-* **Auto-refresh & Instant Transition**: Wallpapers rotate automatically, utilizing smooth opacity transitions.
-* **Interactive Randomizer**: Click the dice icon (`🎲`) on the bottom right to instantly swap wallpapers and fetch a new quote.
-* **Smart Quote Filtering**: Automatically fetches quotes from Goodreads, filtering out quotes longer than 50 words to prevent layout overflow. If a fetched page contains no short quotes, it transparently retries on different pages.
-* **Digital Clock & Customizable Monospace Typography**: Displays a high-precision digital clock in the corner. Users can select from 10 popular monospace fonts (including *Fira Code*, *JetBrains Mono*, *Roboto Mono*, *Share Tech Mono*, and *VT323*) straight from the Wallpaper Engine UI to prevent time-update layout jitter.
+* **Dual Wallpaper Sources**: Switch between **Bing Daily** (national landscapes) and **Wallhaven Popular 4K** (top-rated community images) directly inside the settings.
+* **Dominant Color Transitions & Preloading**: Wallpapers preload 100% in the background, fading smoothly from the image's dominant color to prevent layout stuttering or scan-line loads.
+* **Interactive Randomizer**: Click the dice icon (`🎲`) on the bottom right to instantly swap wallpapers and fetch a new quote with active spinning animations.
+* **Smart Quote Filtering**: Automatically fetches quotes from Goodreads, filtering out quotes longer than 50 words to prevent layout overflow.
+* **Independently Configurable Typography**: Customize the font style independently for the clock, quotes, and countdown timer. Select from 10 popular monospace fonts (Fira Code, JetBrains Mono, Roboto Mono, VT323, etc.) to eliminate layout jitter.
+* **Rotation Countdown Timer**: Toggle a visual countdown timer on the bottom-left corner to show how much time is left before the next rotation.
+* **Background Panels & Glow Shadows**: Switch between a semi-transparent glassmorphic background card or a clean text shadow. Customize the panel/shadow color to fit your desktop theme.
+* **Adjustable Rotation Intervals**: Set the wallpaper swap timer to 10, 20, or 30 minutes in the settings.
 * **Minified & Optimized**: Bundles and minifies all styles, scripts, and libraries into a single file structure for zero-lag rendering.
 
 ---
@@ -52,7 +57,7 @@ This compiles the codebase and outputs the final assets into the `dist/` directo
 1. Open **Wallpaper Engine** and click **Create Wallpaper**.
 2. Select **Open Offline Wallpaper (HTML)**.
 3. Browse to this directory and point it to the compiled file: `dist/index.html`.
-4. Wallpaper Engine will import the project. You can now tweak the **Clock Font** or **Wallpaper Source** configuration options in the user settings panel.
+4. Wallpaper Engine will import the project. You can now tweak the options in the user settings panel.
 5. Publish it to the Steam Workshop via the Steam tab in the creator tool!
 
 ---
@@ -67,9 +72,9 @@ This compiles the codebase and outputs the final assets into the `dist/` directo
 ├── dist/                      # COMPILED BUILD OUTPUT (Do not edit directly)
 ├── index.html                 # Main HTML layout
 ├── style.css                  # Core design stylesheet
-├── script.js                  # Typewriter and settings listener loop
+├── script.js                  # Typewriter, countdown, and settings listener loop
 ├── build.js                   # Node compilation script using esbuild
 ├── project.json               # Wallpaper Engine metadata and settings schema
 ├── package.json               # Dependency and script configuration
-└── preview.jpg                # Wallpaper preview image
+└── README.md                  # Project documentation
 ```

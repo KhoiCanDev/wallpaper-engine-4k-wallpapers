@@ -42,13 +42,23 @@ const getRandomQuote = (extractedQuotes) => {
   return extractedQuotes[randomIndex];
 };
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 async function fetchRandomQuote() {
   let attempts = 0;
   while (attempts < 5) {
+    if (attempts > 0) {
+      await sleep(1000);
+    }
     const randomPage = Math.floor(Math.random() * 100) + 1;
     try {
       const response = await fetch(
-        `https://www.goodreads.com/quotes?page=${randomPage}`
+        `https://www.goodreads.com/quotes?page=${randomPage}`,
+        {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+          }
+        }
       );
       const htmlContent = await response.text();
       const extractedQuotes = extractQuotes(htmlContent);

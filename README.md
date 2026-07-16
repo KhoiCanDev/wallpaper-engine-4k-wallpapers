@@ -1,6 +1,6 @@
 # Bing & Wallhaven 4K Wallpaper with Quotes
 
-A high-performance, dynamic 4K web wallpaper for **Wallpaper Engine** featuring a digital clock, customizable typography, random quotes, smooth dominant-color transitions, and a countdown timer.
+A high-performance, dynamic 4K web wallpaper for **Wallpaper Engine** featuring a digital clock, customizable typography, random quotes, smooth dominant-color transitions, and a countdown timer/weather display.
 
 [**Steam Workshop Page**](https://steamcommunity.com/sharedfiles/filedetails/?id=3481003621)
 
@@ -15,7 +15,7 @@ This repository features an automated build pipeline that bundles and minifies a
 * **Interactive Randomizer**: Click the dice icon (`🎲`) on the bottom right to instantly swap wallpapers and fetch a new quote with active spinning animations.
 * **Smart Quote Filtering**: Automatically fetches quotes from Goodreads, filtering out quotes longer than 50 words to prevent layout overflow.
 * **Independently Configurable Typography**: Customize the font style independently for the clock, quotes, and countdown timer. Select from 10 popular monospace fonts (Fira Code, JetBrains Mono, Roboto Mono, VT323, etc.) to eliminate layout jitter.
-* **Rotation Countdown Timer**: Toggle a visual countdown timer on the bottom-left corner to show how much time is left before the next rotation.
+* **Countdown Timer & Weather Display**: Toggle the bottom-left display between a visual countdown timer or live weather info (fetched via `wttr.in` based on customizable coordinates or auto-IP geolocation).
 * **Background Panels & Glow Shadows**: Switch between a semi-transparent glassmorphic background card or a clean text shadow. Customize the panel/shadow color to fit your desktop theme.
 * **Adjustable Rotation Intervals**: Set the wallpaper swap timer to 10, 20, or 30 minutes in the settings.
 * **Minified & Optimized**: Bundles and minifies all styles, scripts, and libraries into a single file structure for zero-lag rendering.

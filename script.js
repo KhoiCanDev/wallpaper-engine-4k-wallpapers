@@ -57,6 +57,18 @@ let weatherLocation = '';
 let weatherFetchInterval = null;
 let nextChangeTime = 0;
 
+function getWeatherEmoji(code) {
+  if (code === 0) return '☀️';
+  if ([1, 2, 3].includes(code)) return '⛅';
+  if ([45, 48].includes(code)) return '🌫️';
+  if ([51, 53, 55, 80, 81, 82].includes(code)) return '🌦️';
+  if ([56, 57, 66, 67].includes(code)) return '🧊';
+  if ([61, 63, 65].includes(code)) return '🌧️';
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return '❄️';
+  if ([95, 96, 99].includes(code)) return '⛈️';
+  return '🌡️';
+}
+
 async function fetchWeather() {
   const el = document.getElementById('countdown');
   if (!el) return;
@@ -66,15 +78,57 @@ async function fetchWeather() {
   }
 
   try {
+    let lat = 51.5074; // Default to London
+    let lon = -0.1278;
     const loc = weatherLocation.trim();
-    const url = `https://wttr.in/${encodeURIComponent(loc)}?format=%c+%t`;
-    const response = await fetch(url);
+
+    if (loc) {
+      if (loc.includes(',')) {
+        const parts = loc.split(',');
+        if (parts.length === 2) {
+          const parsedLat = parseFloat(parts[0]);
+          const parsedLon = parseFloat(parts[1]);
+          if (!isNaN(parsedLat) && !isNaN(parsedLon)) {
+            lat = parsedLat;
+            lon = parsedLon;
+          }
+        }
+      } else {
+        // Geocode location name using Open-Meteo Geocoding API
+        const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(loc)}&count=1&language=en&format=json`;
+        const geoRes = await fetch(geoUrl);
+        const geoData = await geoRes.json();
+        if (geoData.results && geoData.results.length > 0) {
+          lat = geoData.results[0].latitude;
+          lon = geoData.results[0].longitude;
+        }
+      }
+    } else {
+      // Auto-IP Geolocation
+      try {
+        const ipRes = await fetch('https://ip-api.com/json/');
+        const ipData = await ipRes.json();
+        if (ipData.lat !== undefined && ipData.lon !== undefined) {
+          lat = ipData.lat;
+          lon = ipData.lon;
+        }
+      } catch (err) {
+        console.error('IP Geolocation failed, using default:', err);
+      }
+    }
+
+    // Query Open-Meteo Forecast API
+    const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`;
+    const response = await fetch(forecastUrl);
     if (response.ok) {
-      const text = await response.text();
-      const cleaned = text.replace('+', '').trim();
-      if (bottomLeftMode === 'weather') {
-        el.innerText = cleaned;
-        el.style.display = 'block';
+      const data = await response.json();
+      if (data && data.current) {
+        const temp = Math.round(data.current.temperature_2m);
+        const emoji = getWeatherEmoji(data.current.weather_code);
+        if (bottomLeftMode === 'weather') {
+          el.innerText = `${emoji} ${temp}°C`;
+          el.style.display = 'block';
+        }
       }
     }
   } catch (error) {

@@ -57,11 +57,12 @@ let weatherLocation = '';
 let weatherFetchInterval = null;
 let nextChangeTime = 0;
 
-function getWeatherEmoji(code) {
-  if (code === 0) return '☀️';
-  if ([1, 2, 3].includes(code)) return '⛅';
+function getWeatherEmoji(code, isDay) {
+  if (code === 0) return isDay ? '☀️' : '🌙';
+  if ([1, 2].includes(code)) return isDay ? '🌤️' : '🌙';
+  if (code === 3) return '☁️';
   if ([45, 48].includes(code)) return '🌫️';
-  if ([51, 53, 55, 80, 81, 82].includes(code)) return '🌦️';
+  if ([51, 53, 55, 80, 81, 82].includes(code)) return isDay ? '🌦️' : '🌧️';
   if ([56, 57, 66, 67].includes(code)) return '🧊';
   if ([61, 63, 65].includes(code)) return '🌧️';
   if ([71, 73, 75, 77, 85, 86].includes(code)) return '❄️';
@@ -125,13 +126,14 @@ async function fetchWeather() {
     }
 
     // Query Open-Meteo Forecast API
-    const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`;
+    const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,is_day`;
     const response = await fetch(forecastUrl);
     if (response.ok) {
       const data = await response.json();
       if (data && data.current) {
         const temp = Math.round(data.current.temperature_2m);
-        const emoji = getWeatherEmoji(data.current.weather_code);
+        const isDay = data.current.is_day === 1;
+        const emoji = getWeatherEmoji(data.current.weather_code, isDay);
         if (bottomLeftMode === 'weather') {
           el.innerText = `${emoji} ${temp}°C ${cityName}`;
           el.style.display = 'block';

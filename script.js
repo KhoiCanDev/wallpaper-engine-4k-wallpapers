@@ -81,29 +81,22 @@ async function fetchWeather() {
     let lat = 51.5074; // Default to London
     let lon = -0.1278;
     const loc = weatherLocation.trim();
+    let hasCoords = false;
 
-    if (loc) {
-      if (loc.includes(',')) {
-        const parts = loc.split(',');
-        if (parts.length === 2) {
-          const parsedLat = parseFloat(parts[0]);
-          const parsedLon = parseFloat(parts[1]);
-          if (!isNaN(parsedLat) && !isNaN(parsedLon)) {
-            lat = parsedLat;
-            lon = parsedLon;
-          }
-        }
-      } else {
-        // Geocode location name using Open-Meteo Geocoding API
-        const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(loc)}&count=1&language=en&format=json`;
-        const geoRes = await fetch(geoUrl);
-        const geoData = await geoRes.json();
-        if (geoData.results && geoData.results.length > 0) {
-          lat = geoData.results[0].latitude;
-          lon = geoData.results[0].longitude;
+    if (loc && loc.includes(',')) {
+      const parts = loc.split(',');
+      if (parts.length === 2) {
+        const parsedLat = parseFloat(parts[0]);
+        const parsedLon = parseFloat(parts[1]);
+        if (!isNaN(parsedLat) && !isNaN(parsedLon)) {
+          lat = parsedLat;
+          lon = parsedLon;
+          hasCoords = true;
         }
       }
-    } else {
+    }
+
+    if (!hasCoords) {
       // Auto-IP Geolocation
       try {
         const ipRes = await fetch('https://ip-api.com/json/');

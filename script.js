@@ -80,6 +80,7 @@ async function fetchWeather() {
   try {
     let lat = 51.5074; // Default to London
     let lon = -0.1278;
+    let cityName = 'London';
     const loc = weatherLocation.trim();
     let hasCoords = false;
 
@@ -92,6 +93,18 @@ async function fetchWeather() {
           lat = parsedLat;
           lon = parsedLon;
           hasCoords = true;
+
+          // Reverse geocode to get city name for custom coordinates
+          try {
+            const revRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+            if (revRes.ok) {
+              const revData = await revRes.json();
+              cityName = revData.city || revData.locality || `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+            }
+          } catch (err) {
+            console.error('Reverse geocoding failed:', err);
+            cityName = `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+          }
         }
       }
     }
@@ -104,6 +117,7 @@ async function fetchWeather() {
         if (ipData.lat !== undefined && ipData.lon !== undefined) {
           lat = ipData.lat;
           lon = ipData.lon;
+          cityName = ipData.city || 'Local';
         }
       } catch (err) {
         console.error('IP Geolocation failed, using default:', err);
@@ -119,7 +133,7 @@ async function fetchWeather() {
         const temp = Math.round(data.current.temperature_2m);
         const emoji = getWeatherEmoji(data.current.weather_code);
         if (bottomLeftMode === 'weather') {
-          el.innerText = `${emoji} ${temp}°C`;
+          el.innerText = `${emoji} ${temp}°C ${cityName}`;
           el.style.display = 'block';
         }
       }

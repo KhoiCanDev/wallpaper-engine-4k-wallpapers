@@ -7,7 +7,7 @@
     "build": "node build.js"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.28.1"
   },
   "dependencies": {
     "jquery": "^4.0.0",

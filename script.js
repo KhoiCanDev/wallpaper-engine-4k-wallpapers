@@ -52,15 +52,57 @@ async function updateWallpaper() {
 }
 
 let countdownInterval = null;
-let showCountdown = false;
+let bottomLeftMode = 'off';
+let weatherLocation = '';
+let weatherFetchInterval = null;
 let nextChangeTime = 0;
+
+async function fetchWeather() {
+  const el = document.getElementById('countdown');
+  if (!el) return;
+
+  if (bottomLeftMode !== 'weather') {
+    return;
+  }
+
+  try {
+    const loc = weatherLocation.trim();
+    const url = `https://wttr.in/${encodeURIComponent(loc)}?format=%c+%t`;
+    const response = await fetch(url);
+    if (response.ok) {
+      const text = await response.text();
+      const cleaned = text.replace('+', '').trim();
+      if (bottomLeftMode === 'weather') {
+        el.innerText = cleaned;
+        el.style.display = 'block';
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching weather:', error);
+  }
+}
+
+function startWeatherLoop() {
+  if (weatherFetchInterval) clearInterval(weatherFetchInterval);
+  fetchWeather();
+  weatherFetchInterval = setInterval(fetchWeather, 15 * 60 * 1000);
+}
+
+function stopWeatherLoop() {
+  if (weatherFetchInterval) {
+    clearInterval(weatherFetchInterval);
+    weatherFetchInterval = null;
+  }
+}
 
 function updateCountdownDisplay() {
   const el = document.getElementById('countdown');
   if (!el) return;
 
-  if (!showCountdown) {
-    el.style.display = 'none';
+  if (bottomLeftMode !== 'countdown') {
+    if (bottomLeftMode !== 'weather') {
+      el.style.display = 'none';
+    }
     return;
   }
 
@@ -85,11 +127,13 @@ function startCountdown(duration) {
 
 async function generateText() {
   try {
-    if (countdownInterval) {
-      clearInterval(countdownInterval);
+    if (bottomLeftMode === 'countdown') {
+      if (countdownInterval) {
+        clearInterval(countdownInterval);
+      }
+      const el = document.getElementById('countdown');
+      if (el) el.style.display = 'none';
     }
-    const el = document.getElementById('countdown');
-    if (el) el.style.display = 'none';
 
     // Recreate the TypeIt instance to completely clear the queue and avoid duplicate queue execution
     if (typedInstance) {
@@ -110,7 +154,9 @@ async function generateText() {
       .exec(() => {
         const cursor = document.querySelector('.ti-cursor');
         if (cursor) cursor.style.display = 'none';
-        startCountdown(imageRotationTime);
+        if (bottomLeftMode === 'countdown') {
+          startCountdown(imageRotationTime);
+        }
       })
       .pause(imageRotationTime)
       .flush(() => {
@@ -241,9 +287,32 @@ window.wallpaperPropertyListener = {
       }
     }
 
-    if (properties.showcountdown) {
-      showCountdown = properties.showcountdown.value;
-      updateCountdownDisplay();
+    if (properties.bottomleftmode) {
+      bottomLeftMode = properties.bottomleftmode.value;
+
+      const el = document.getElementById('countdown');
+      if (el) el.style.display = 'none';
+
+      if (bottomLeftMode === 'countdown') {
+        stopWeatherLoop();
+        updateCountdownDisplay();
+      } else if (bottomLeftMode === 'weather') {
+        startWeatherLoop();
+      } else {
+        stopWeatherLoop();
+      }
+    }
+
+    if (properties.weatherlocation) {
+      const newLoc = properties.weatherlocation.value;
+      if (!isInitialLoad && weatherLocation !== newLoc) {
+        weatherLocation = newLoc;
+        if (bottomLeftMode === 'weather') {
+          fetchWeather();
+        }
+      } else {
+        weatherLocation = newLoc;
+      }
     }
 
     if (properties.bgtype) {

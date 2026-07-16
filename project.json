@@ -51,11 +51,31 @@
 					}
 				]
 			},
-			"showcountdown": {
+			"bottomleftmode": {
 				"order": 130,
-				"text": "Show Countdown Timer",
-				"type": "bool",
-				"value": false
+				"text": "Bottom-Left Display",
+				"type": "combo",
+				"value": "off",
+				"options": [
+					{
+						"label": "Disabled",
+						"value": "off"
+					},
+					{
+						"label": "Countdown Timer",
+						"value": "countdown"
+					},
+					{
+						"label": "Weather Info",
+						"value": "weather"
+					}
+				]
+			},
+			"weatherlocation": {
+				"order": 140,
+				"text": "Weather Location (Lat,Lon or Name)",
+				"type": "text",
+				"value": ""
 			},
 			"font_group": {
 				"order": 200,

@@ -73,7 +73,7 @@
 			},
 			"weatherlocation": {
 				"order": 140,
-				"text": "Weather Location (Lat,Lon or Name)",
+				"text": "Weather (Lat,Lon)",
 				"type": "text",
 				"value": ""
 			},

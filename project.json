@@ -74,8 +74,8 @@
 			"weatherlocation": {
 				"order": 140,
 				"text": "Weather (Lat,Lon)",
-				"type": "text",
-				"value": ""
+				"type": "textinput",
+				"value": "10.823,106.630"
 			},
 			"font_group": {
 				"order": 200,
